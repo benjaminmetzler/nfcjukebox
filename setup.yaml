@@ -1,0 +1,13 @@
+---
+- name: Setup NFC Jukebox
+  hosts: all
+  become: yes
+  tasks:
+    - name: Run raspi-config to enable I2C
+      command: sudo raspi-config nonint do_i2c 0
+    - name: Install needed packages
+      ansible.builtin.apt:
+        pkg:
+        - libnfc6
+        - libnfc-bin 
+        - libnfc-examples
